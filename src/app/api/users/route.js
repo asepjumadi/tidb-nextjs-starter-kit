@@ -42,3 +42,19 @@ export async function GET(request) {
     return NextResponse.json({ error:'Database query failed',details:error.message }, { status: 500 });
   }
 }
+export async function POST(request) {
+  const { name, email } = await request.json();
+
+  if (!name || !email) {
+    return NextResponse.json({ error: 'name and email are required' }, { status: 400 });
+  }
+
+  const dataService = new DataService();
+
+  try {
+    const results = await dataService.singleQuery('INSERT INTO users (name, email) VALUES (?, ?);', [name, email]);
+    return NextResponse.json({ results }, { status: 201 });
+  } catch (error) {
+    return NextResponse.json({ error:'Database query failed',details:error.message }, { status: 500 });
+  }
+}

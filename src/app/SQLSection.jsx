@@ -9,7 +9,7 @@ export default function SQLSection() {
 
   const retriveData = async () => {
     try {
-      const response = await fetch('/api/hello');
+      const response = await fetch('/api/users');
       const data = await response.json();
       return { data };
     } catch (error) {
@@ -62,7 +62,7 @@ export default function SQLSection() {
 
         <div className='mockup-code'>
           <pre data-prefix='>'>
-            <code>{`SELECT "Hello World";`}</code>
+            <code>{`SELECT  * users;`}</code>
           </pre>
           {(results || error) && <pre data-prefix=''> </pre>}
           {results && stringifyIntoLines(results, 'error')}
